@@ -2,8 +2,10 @@
 COWFILE=""
 if [ $# -ge 1 ]
 then
+	# use specified cow in first argument
 	COWFILE="-f ${1}"
 else
+	# pick a random cow
 	cows=($(find /usr/share/cowsay/cows -name *.cow -printf "%f\n"))
 	cow_number=$(($RANDOM % ${#cows[@]} + 1))
 	printf "${cows[$cow_number]}" | sed 's/.cow$/ says: \n/' | lolcat -F 0.75
