@@ -6,7 +6,9 @@ then
 else
 	cows=($(find /usr/share/cowsay/cows -name *.cow -printf "%f\n"))
 	cow_number=$(($RANDOM % ${#cows[@]} + 1))
-	printf "\n${cows[$cow_number]}" | sed 's/.cow$/ says: \n/' | lolcat -F 0.75
+	printf "\n${cows[$cow_number]}" | \
+                sed 's/.cow$/ says: \n/' | \
+                lolcat -F 0.75
 	sleep 1
 	COWFILE=$(echo "-f ${cows[$cow_number]}" | sed 's/.cow$//')
 fi
