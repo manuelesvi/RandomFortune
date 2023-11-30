@@ -22,5 +22,3 @@ fortune | tee -a fortune.txt | \
        lolcat -a -F 0.5 -s 40 -p $(($RANDOM % 10 + 1)) && \
        printf '_%.0s' {1..40} >> fortune.txt && \
        printf '\n' >> fortune.txt
-
-
