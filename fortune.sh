@@ -17,8 +17,8 @@ fi
 
 printf '\n' >> fortune.txt
 
-fortune | tee -a fortune.txt | \
-       (printf "\n" && cowsay $COWFILE && printf "\n") | \
+fortune | tee -a fortune.txt | \ (printf "\n" && | \ 
+       cowsay $COWFILE && printf "\n") | \
        lolcat -a -F 0.5 -s 40 -p $(($RANDOM % 10 + 1)) && \
        printf '_%.0s' {1..40} >> fortune.txt && \
        printf '\n' >> fortune.txt
