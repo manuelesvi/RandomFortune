@@ -12,7 +12,7 @@ else
 	cow_number=$(($RANDOM % ${#cows[@]} + 1))
 	printf "\n${cows[$cow_number]}" | \
                 sed 's/.cow$/ says: \n/' | \
-                lolcat -F 0.75
+                lolcat -F 0.75 -S 10
 	sleep 1
 	COWFILE=$(echo "-f ${cows[$cow_number]}" | \
 	          sed 's/.cow$//')
