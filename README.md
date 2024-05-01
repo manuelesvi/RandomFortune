@@ -1,5 +1,5 @@
 # RandomFortune
-A BASH script to show a colorized character saying what UNIX fortune command has for you.
+A BASH script that shows a colorized character saying what UNIX `fortune` command has for you.
 
 # Requirements
 - lolcat
