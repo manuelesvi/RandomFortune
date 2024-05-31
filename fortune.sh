@@ -1,7 +1,6 @@
 #!/bin/bash
 
 COWFILE=""
-
 if [ $# -ge 1 ]
 then
 	COWFILE="-f ${1}"
