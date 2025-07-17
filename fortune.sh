@@ -19,12 +19,21 @@ fi
 
 # keep a record in fortune.txt
 printf '\n' >> fortune.txt
-
-fortune | tee -a fortune.txt | \
+fortune=$(fortune)
+echo $fortune | tee -a fortune.txt | \
        (printf '\n' && \
        cowsay $COWFILE && printf '\n') | \
        lolcat --animate \
               --freq=0.5 --duration=4 --speed=30 \
 	      --spread=$(($RANDOM % 10 + 1)) && \
-       printf '_%.0s' {1..40} >> fortune.txt && \ # print 40 times _
+       printf '_%.0s' {1..40} >> fortune.txt && \
        printf '\n' >> fortune.txt
+
+mkdir -p ~/fortunes/day_$(date +%Y_%m_%d)
+filename=~/fortunes/day_$(date +%Y_%m_%d)/fortune_$(date +%Y%m%d)_$(date +%H%M%S).txt
+echo $fortune >> $filename
+cd ~/fortunes
+git add $filename
+git commit -m "${fortune:0:40}..." > /dev/null 2>&1
+cd - > /dev/null 2>&1
+unset filename fortune
