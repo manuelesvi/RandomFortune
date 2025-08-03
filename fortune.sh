@@ -29,11 +29,21 @@ echo $fortune | tee -a fortune.txt | \
        printf '_%.0s' {1..40} >> fortune.txt && \
        printf '\n' >> fortune.txt
 
-mkdir -p ~/fortunes/day_$(date +%Y_%m_%d)
+# create new file & commit it to repo
+[ ! -d ~/fortunes/day_$(date +%Y_%m_%d) ] && \
+  mkdir -p ~/fortunes/day_$(date +%Y_%m_%d)
+
 filename=~/fortunes/day_$(date +%Y_%m_%d)/fortune_$(date +%Y%m%d)_$(date +%H%M%S).txt
-echo $fortune >> $filename
-cd ~/fortunes
-git add $filename
-git commit -m "${fortune:0:40}..." > /dev/null 2>&1
+echo $fortune > $filename
+
+cd ~/fortunes; git add $filename
+
+if [ ${#fortune} -lt 80 ]; then
+  git commit -m "$fortune" > /dev/null 2>&1
+else
+  git commit -m "${fortune:0:80}..." > /dev/null 2>&1 # use first 80 characters only as commit's message
+fi
+
 cd - > /dev/null 2>&1
+
 unset filename fortune
